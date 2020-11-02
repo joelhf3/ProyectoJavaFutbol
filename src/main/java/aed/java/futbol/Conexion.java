@@ -2,28 +2,42 @@ package aed.java.futbol;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class Conexion {
 
 	public Connection conexion;
 	
-	public Connection conectar()
+	public Connection Conectar(String servidor)
 	{
 		try
 		{
-			String url = "jdbc:mysql://localhost:3306/bdfutbol";
-			String usuario = "root";
-			String contrasenia = "";
+			String url = null;
+			String usuario = null;
+			String contrasenia = null;
 			
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			
+			if(servidor.equals("mysql"))
+			{
+				url = "jdbc:mysql://localhost:3306/bdfutbol";
+				usuario = "root";
+				contrasenia = "";
+				
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			}
+			else if(servidor.equals("sqlserver"))
+			{
+				
+			}
+			else if(servidor.equals("access"))
+			{
+				
+			}
+					
 			conexion = DriverManager.getConnection(url, usuario, contrasenia);
 			
 			return conexion;
 		
 		}
-		catch(SQLException | ClassNotFoundException e)
+		catch(Exception e)
 		{
 			e.getMessage();
 		}
@@ -31,13 +45,13 @@ public class Conexion {
 		return null;
 	}
 	
-	public void desconectar()
+	public void Desconectar()
 	{
 		try
 		{
 			conexion.close();
 		}
-		catch(SQLException e)
+		catch(Exception e)
 		{
 			e.getMessage();
 		}
