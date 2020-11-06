@@ -22,17 +22,27 @@ public class Conexion {
 				contrasenia = "";
 				
 				Class.forName("com.mysql.cj.jdbc.Driver");
+				
+				conexion = DriverManager.getConnection(url, usuario, contrasenia);
 			}
 			else if(servidor.equals("sqlserver"))
 			{
+				url = "jdbc:sqlserver://JOEL-PC\\SQLEXPRESS;DataBaseName=bdFutbol";
+				usuario = "joel";
+				contrasenia = "1234";
 				
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				
+				conexion = DriverManager.getConnection(url, usuario, contrasenia);			
 			}
 			else if(servidor.equals("access"))
 			{
+				url = "jdbc:ucanaccess://src/main/resources\\BdFutbolAccess.accdb";
 				
+				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+				
+				conexion = DriverManager.getConnection(url);
 			}
-					
-			conexion = DriverManager.getConnection(url, usuario, contrasenia);
 			
 			return conexion;
 		
